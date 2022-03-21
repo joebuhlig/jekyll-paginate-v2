@@ -14,7 +14,8 @@ module Jekyll
         @base = ''
         @url = ''
         @name = index_pageandext.nil? ? 'index.html' : index_pageandext
-
+        @path = page_to_copy.path
+        
         self.process(@name) # Creates the basename and ext member values
 
         # Only need to copy the data part of the page as it already contains the layout information
@@ -47,6 +48,8 @@ module Jekyll
       end
 
       def set_url(url_value)
+        @path = url_value[1..]
+        @dir = File.dirname(@path)
         @url = url_value
       end
     end # class PaginationPage
